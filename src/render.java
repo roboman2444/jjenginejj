@@ -47,7 +47,7 @@ public class render extends jjenginejj {
 		}
 
 		Shader.initShader();
-		Framebuffer.initFramebuffers();
+	//	Framebuffer.initFramebuffers();
 		// init OpenGL
 
 		glDepthFunc(GL_LEQUAL);

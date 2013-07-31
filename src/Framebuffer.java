@@ -62,15 +62,9 @@ public class Framebuffer {
 		return 1;
 
 	}
-	public static void initFramebuffers(){
-		//framebufferList.put("renderOut", new Framebuffer(render.sizeX, render.sizeY, true));
+	public static void addFramebuffer(String Fbname ,int sizeX, int sizeY, boolean depth){
 
-
-		//framebufferList.put("blurTemp", new Framebuffer(render.sizeX, render.sizeY, false));
-		//framebufferList.put("blurOut", new Framebuffer(render.sizeX, render.sizeY, false));
-
-		//framebufferList.put("bloomOut", new Framebuffer(render.sizeX, render.sizeY, false));
-		//framebufferList.put("flareOut", new Framebuffer(render.sizeX, render.sizeY, false));
+		framebufferList.put(Fbname, new Framebuffer(sizeX, sizeY, depth));
 
 	}
 }

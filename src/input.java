@@ -32,7 +32,7 @@ public class input {
 			}
 		}
 	}
-	public static void initInput(){
+	public static void init(){
 		//todo set up some sort of keybind things
 		if(snapMouse)Mouse.setCursorPosition(render.sizeX/2, render.sizeY/2);
 		//Mouse.setGrabbed(false);
@@ -40,7 +40,7 @@ public class input {
 	}
 	public static void toggleMouseSnap(){
 		snapMouse = !input.snapMouse;
-		initInput();
+		init();//hey, it does what i need
 		mouseDeltaX = 0;
 		mouseDeltaY = 0;
 	}

@@ -17,6 +17,13 @@ public class jjenginejj {
 		System.setProperty("org.lwjgl.librarypath", new File(lwjgl_folder).getAbsolutePath());
 	}
 	public static void main(String[] args){
+		render.init();
+		input.init();
+		while(true){
+			render.draw();
+			gamecode.run();
+			input.getInput();
+		}
 
 	}
 }
