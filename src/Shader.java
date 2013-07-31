@@ -14,7 +14,7 @@ import org.lwjgl.opengl.GL11;
 public class Shader{
 	public static HashMap<String, Integer> shaders = new HashMap<String, Integer>();
 	private static ArrayList<String> findShaders(File dir){
-		if(!dir.isDirectory()) return null; // returning null kinda borks some stuff
+		if(!dir.isDirectory()) return null; // fixed
 		//System.out.println("jiggles");
 		File[] files = dir.listFiles();
 		ArrayList<String> returnnames = new ArrayList<String>();
