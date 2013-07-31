@@ -36,6 +36,10 @@ public class Shader{
 	public static void initShader(){
 		File directory = new File("shaders/");
 		ArrayList<String> ShaderNames = findShaders(directory);
+		if(ShaderNames == null){
+			System.out.println("No shaders loaded... this is a problem");
+			return;
+		}
 		for(int i=0; i< ShaderNames.size(); i++){
 			int vertShader = 0, fragShader = 0;
 			try {
