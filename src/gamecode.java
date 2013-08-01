@@ -53,4 +53,7 @@ public class gamecode {
 		makeVectorsY = (float)tY;
 		makeVectorsZ = (float)tZ;
 	}
+	public static void init(){
+
+	}
 }

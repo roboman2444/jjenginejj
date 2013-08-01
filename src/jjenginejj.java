@@ -19,6 +19,7 @@ public class jjenginejj {
 	public static void main(String[] args){
 		render.init();
 		input.init();
+		gamecode.init();
 		while(true){
 			render.draw();
 			gamecode.run();
