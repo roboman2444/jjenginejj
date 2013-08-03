@@ -13,6 +13,22 @@ public class vector3d {
 		y = i;
 		z = i;
 	}
+	public vector3d(float[] i){
+		x = i[0];
+		y = i[1];
+		z = i[2];
+	}
+	//do i even need this?
+	public static vector3d arrayToVec(float[] i){
+		return new vector3d(i);
+	}
+	public static float[] vecToArray(vector3d v){
+		float[] i = new float[3];
+		i[0] = v.x;
+		i[1] = v.y;
+		i[2] = v.z;
+	}
+	//rotate
 	public static vector3d rotate(vector3d v, float angle, vector3d axis){
 		//todo
 		//todo
