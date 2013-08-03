@@ -1,5 +1,6 @@
 import org.lwjgl.opengl.GL15;
 
+import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 
@@ -9,6 +10,7 @@ import static org.lwjgl.opengl.ARBBufferObject.glGenBuffersARB;
 
 public class grid {
 	//public HashMap<Integer, block> blocks = new HashMap(); // integer for id... wait why not arraylist
+	FloatBuffer
 	public ArrayList<block> blocks = new ArrayList();
 	public int vVBOid;
 	//todo add constuctor
@@ -40,6 +42,7 @@ public class grid {
 		}
 	}
 	public void dataToVBO(){
+		FloatBuffer cubes
 		glBindBufferARB(GL15.GL_ARRAY_BUFFER, vVBOid);
 		//glBufferDataARB( type , SIZEDA, DATA, GL_STATIC_DRAW_ARB)
 		//type is likely GL_ARRAY_BUFFER_ARB
