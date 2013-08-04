@@ -1,3 +1,4 @@
+import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL15;
 
 import java.nio.ByteBuffer;
@@ -42,9 +43,17 @@ public class grid {
 	}
 	public void dataToVBO(){
 		glBindBufferARB(GL15.GL_ARRAY_BUFFER, vVBOid);
+		int numOfverts = 0;
+		int numOftris = 0;
 		for(int i=0; i < blocks.size(); i++){
-			//FloatBuffer verts = FloatBuffer.allocate(blocks.size()*9);
-
+			numOfverts += blocks.get(i).m.v.size();
+			numOftris += blocks.get(i).m.tris.size();
+		}
+		FloatBuffer verts =  BufferUtils.createFloatBuffer(numOfverts*9);
+		verts.flip();
+		FloatBuffer tris =  BufferUtils.createFloatBuffer(numOfverts*3);
+		tris.flip();
+		for(int i=0; i < blocks.size(); i++){
 
 		}
 		//glBufferDataARB( type , SIZEDA, DATA, GL_STATIC_DRAW_ARB)

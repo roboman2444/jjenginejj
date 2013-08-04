@@ -31,17 +31,17 @@ public class vertex {
 		pos[2] *= scale;
 	}
 	//transform
-	public void transform( vector3d t){
+	public void translate( vector3d t){
 		pos[0] += t.x;
 		pos[1] += t.y;
 		pos[2] += t.z;
 	}
-	public void transform( float[] t){
+	public void translate( float[] t){
 		pos[0] += t[0];
 		pos[1] += t[1];
 		pos[2] += t[2];
 	}
-	public void transform(float x, float y, float z){
+	public void translate(float x, float y, float z){
 		pos[0] += x;
 		pos[1] += y;
 		pos[2] += z;
