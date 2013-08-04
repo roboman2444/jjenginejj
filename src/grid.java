@@ -46,7 +46,7 @@ public class grid {
 		int numOfVerts = 0;
 		int numOfTris = 0;
 		for(int i=0; i < blocks.size(); i++){
-			numOfVerts += blocks.get(i).m.v.size();
+			numOfVerts += blocks.get(i).m.verts.size();
 			numOfTris += blocks.get(i).m.tris.size();
 		}
 		FloatBuffer verts =  BufferUtils.createFloatBuffer(numOfVerts*9);
@@ -58,7 +58,7 @@ public class grid {
 		for(int i=0; i < blocks.size(); i++){
 			verts.put(blocks.get(i).genVerts());
 			tris.put(blocks.get(i).genTris(indexOfVerts*9));
-			numOfVerts += blocks.get(i).m.v.size();
+			numOfVerts += blocks.get(i).m.verts.size();
 			numOfTris += blocks.get(i).m.tris.size();
 
 		}

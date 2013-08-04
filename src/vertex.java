@@ -9,6 +9,13 @@ public class vertex {
 		Arrays.fill(color, 1);
 		Arrays.fill(texcoord, 1);
 	}
+	public vertex(float x, float y, float z){
+		pos[0] = x;
+		pos[1] = y;
+		pos[2] = z;
+		Arrays.fill(color, 1);
+		Arrays.fill(texcoord, 1);
+	}
 	//scale
 	public void scale(vector3d scale){
 		pos[0] *= scale.x;
