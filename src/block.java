@@ -1,3 +1,4 @@
+import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 
 public class block {
@@ -35,4 +36,10 @@ public class block {
 		return data;
 	}
 	*/
+	public FloatBuffer genVerts(){
+		return null;
+	}
+	public ByteBuffer genTris(int index){
+		return null;
+	}
 }

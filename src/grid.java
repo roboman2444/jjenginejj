@@ -43,19 +43,27 @@ public class grid {
 	}
 	public void dataToVBO(){
 		glBindBufferARB(GL15.GL_ARRAY_BUFFER, vVBOid);
-		int numOfverts = 0;
-		int numOftris = 0;
+		int numOfVerts = 0;
+		int numOfTris = 0;
 		for(int i=0; i < blocks.size(); i++){
-			numOfverts += blocks.get(i).m.v.size();
-			numOftris += blocks.get(i).m.tris.size();
+			numOfVerts += blocks.get(i).m.v.size();
+			numOfTris += blocks.get(i).m.tris.size();
 		}
-		FloatBuffer verts =  BufferUtils.createFloatBuffer(numOfverts*9);
-		verts.flip();
-		FloatBuffer tris =  BufferUtils.createFloatBuffer(numOfverts*3);
-		tris.flip();
+		FloatBuffer verts =  BufferUtils.createFloatBuffer(numOfVerts*9);
+
+		ByteBuffer tris =  BufferUtils.createByteBuffer(numOfVerts*3*4);
+
+		int indexOfVerts = 0;
+		int indexOfTris = 0;
 		for(int i=0; i < blocks.size(); i++){
+			verts.put(blocks.get(i).genVerts());
+			tris.put(blocks.get(i).genTris(indexOfVerts*9));
+			numOfVerts += blocks.get(i).m.v.size();
+			numOfTris += blocks.get(i).m.tris.size();
 
 		}
+		tris.flip();
+		verts.flip();
 		//glBufferDataARB( type , SIZEDA, DATA, GL_STATIC_DRAW_ARB)
 		//type is likely GL_ARRAY_BUFFER_ARB
 

@@ -10,13 +10,13 @@ public class model {
 
 	}
 	public static model loadModel(String filename){
-		model m;
-		if((m = modellist.get(filename))== null){
+		model m = modellist.get(filename);
+		if(m == null){
 			m = new model();
+
 		}
 		return m;
 	}
-
 	public void scale(vector3d s){
 		for(int i=0; i < v.size(); i++){
 			v.get(i).scale(s);
