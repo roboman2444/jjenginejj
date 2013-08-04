@@ -41,12 +41,9 @@ public class grid {
 		}
 	}
 	public void dataToVBO(){
-		FloatBuffer cubes
 		glBindBufferARB(GL15.GL_ARRAY_BUFFER, vVBOid);
 		for(int i=0; i < blocks.size(); i++){
-			FloatBuffer verts = FloatBuffer.allocate(blocks.size()*9);
-			verts.put(blocks.get(i).genVerts());
-			verts.put
+			//FloatBuffer verts = FloatBuffer.allocate(blocks.size()*9);
 
 
 		}
