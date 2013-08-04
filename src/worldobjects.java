@@ -7,7 +7,7 @@ public class worldobjects {
 
 	public static void addBlock(block b){
 		//todo make this hashmap better
-		String key = (int)(b.posx/gridsize) + "," + (int)(b.posy/gridsize);
+		String key = (int)(b.pos.x/gridsize) + "," + (int)(b.pos.y/gridsize);
 
 		grid g = grids.get(key);
 		if(g == null){ // if no grid exists there

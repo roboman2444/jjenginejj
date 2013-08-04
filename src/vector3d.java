@@ -22,11 +22,13 @@ public class vector3d {
 	public static vector3d arrayToVec(float[] i){
 		return new vector3d(i);
 	}
+	//vectoarray
 	public static float[] vecToArray(vector3d v){
 		float[] i = new float[3];
 		i[0] = v.x;
 		i[1] = v.y;
 		i[2] = v.z;
+		return i;
 	}
 	//rotate
 	public static vector3d rotate(vector3d v, float angle, vector3d axis){
