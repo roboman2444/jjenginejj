@@ -41,7 +41,7 @@ public class grid {
 
 		}
 	}
-	public void dataToVBO(){
+	/*public void dataToVBO(){
 		glBindBufferARB(GL15.GL_ARRAY_BUFFER, vVBOid);
 		int numOfVerts = 0;
 		int numOfTris = 0;
@@ -71,4 +71,5 @@ public class grid {
 	private void delVBO(int id){
 		glDeleteBuffersARB(vVBOid);
 	}
+	*/
 }

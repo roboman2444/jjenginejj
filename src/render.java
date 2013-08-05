@@ -1,5 +1,10 @@
+import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.*;
+
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
+
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.*;
@@ -74,7 +79,39 @@ public class render extends jjenginejj {
 		//Framebuffer.framebufferList.get("flareOut").resizeFramebuffer(x, y);
 		System.out.println("Window resized to " + sizeX + "x" + sizeY);
 	}
+	public static void drawModel(model m){
+		if(m.vboid == 0){
+			System.out.println("making vbo for model ");
+			IntBuffer fb = BufferUtils.createIntBuffer(m.numFaces*3);
+			FloatBuffer vb = BufferUtils.createFloatBuffer(m.numVerts*5);
+			vb.put(m.verts);
+			fb.put(m.faces);
+			fb.flip();
+			vb.flip();
+			m.vaoid = GL30.glGenVertexArrays();
+			GL30.glBindVertexArray(m.vaoid);
+			m.vboid = GL15.glGenBuffers();
+			GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, m.vboid);
+			GL15.glBufferData(GL15.GL_ARRAY_BUFFER, vb, GL15.GL_STATIC_DRAW);
+			GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0);
+			GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
+			GL30.glBindVertexArray(0);
 
+
+			m.vboiid = GL15.glGenBuffers();
+			GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, m.vboiid);
+			GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, fb, GL15.GL_STATIC_DRAW);
+			GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
+		}
+		GL30.glBindVertexArray(m.vaoid);
+		GL20.glEnableVertexAttribArray(0);
+		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, m.vboiid);
+		GL11.glDrawElements(GL11.GL_TRIANGLES, m.numFaces*3, GL11.GL_UNSIGNED_BYTE, 0);
+		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
+		GL20.glDisableVertexAttribArray(0);
+		GL30.glBindVertexArray(0);
+
+	}
 	public static void draw() {
 		glDisable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
@@ -89,6 +126,8 @@ public class render extends jjenginejj {
 		//glMatrixMode(GL_MODELVIEW);//just fo shitsngiggles
 		glLoadIdentity();// again, for shitsngiggles
 		camera.AdjustToCamera();
+		glColor3f(1.0f, 1.0f, 0.0f);
+		drawModel(model.modellist.get("untitled.obj"));
 
 		if(PostProcessEnabled){
 			postprocess.PostProcess();

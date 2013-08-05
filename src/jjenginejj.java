@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
 
 public class jjenginejj {
@@ -20,6 +21,11 @@ public class jjenginejj {
 		render.init();
 		input.init();
 		gamecode.init();
+		try {
+			model.loadModel("untitled.obj");
+		} catch (IOException e) {
+			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+		}
 		while(true){
 			render.draw();
 			gamecode.run();
