@@ -7,7 +7,7 @@ import static org.lwjgl.opengl.EXTFramebufferObject.glBindFramebufferEXT;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 
-public class postprocess extends render {
+public class postprocess {
 	private static void drawFSQuad(){     //todo make betterly
 		glLoadIdentity();
 		render.translateCrap(0f, -2f, 0f);

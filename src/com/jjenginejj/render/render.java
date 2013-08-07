@@ -1,7 +1,6 @@
 package com.jjenginejj.render;
 
 import com.jjenginejj.render.model.model;
-import com.jjenginejj.system.jjenginejj;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.*;
@@ -14,7 +13,7 @@ import static org.lwjgl.opengl.EXTFramebufferObject.glBindFramebufferEXT;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.gluPerspective;
 
-public class render extends jjenginejj {
+public class render {
 	public static boolean PostProcessEnabled = false;
 	public static boolean PostProcessBloom = false;
 	public static boolean PostProcessFlare = true;
