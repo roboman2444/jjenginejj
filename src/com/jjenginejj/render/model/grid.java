@@ -1,6 +1,8 @@
 package com.jjenginejj.render.model;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL15;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -10,13 +12,20 @@ import static org.lwjgl.opengl.ARBBufferObject.glDeleteBuffersARB;
 import static org.lwjgl.opengl.ARBBufferObject.glGenBuffersARB;
 
 public class grid {
+	public final int x;
+	public final int y;
+	private int vertcount = 0;
+	private int tricount = 0;
 	//public HashMap<Integer, com.jjjenginejj.render.com.jjenginejj.render.model.model.block> blocks = new HashMap(); // integer for id... wait why not arraylist
 	public ArrayList<block> blocks = new ArrayList();
-	public int VBOid;
+	public int VBOvertsid, VBOindicesid;
 	//todo add constuctor
 	//constructor will generate vbo for itself
-	public grid(){
-		VBOid = glGenBuffersARB();
+	public grid(int xi, int yi){
+		VBOvertsid = glGenBuffersARB();
+		VBOindicesid = glGenBuffersARB();
+		x = xi;
+		y = yi;
 
 	}
 	public void addBlock(block b){
@@ -32,12 +41,20 @@ public class grid {
 		// if i dont have any cubes, remove vbo.
 		//regenerate vbobuffer
 	}
-	private void genverts(){
+	public void draw(){
+		GL11.glEnableClientState(GL11.GL_VERTEX_ARRAY);
+		GL11.glEnableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, VBOvertsid);
+		GL11.glVertexPointer(3, GL11.GL_FLOAT, 20, 0); //do i need this?
+		GL11.glTexCoordPointer(2, GL11.GL_FLOAT,20,12);
+		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, VBOindicesid);
+		GL11.glDrawElements(GL11.GL_TRIANGLES, tricount*3, GL11.GL_UNSIGNED_INT,0);
+	}
+	public void genverts(){
 
 		//generates them verts
 		//todo return something useful
-		int vertcount = 0;
-		int tricount = 0;
+
 		for(int i =0; i< blocks.size(); i++){ 			//todo maybe put counting in a less used function... but it wont speed up that much, not like its being called often
 			block b = blocks.get(i); // small speed up?
 			vertcount += b.m.numVerts;
@@ -55,10 +72,18 @@ public class grid {
 		}
 		ib.flip(); // back to 0
 		vb.flip();
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, VBOvertsid);
+		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, vb, GL15.GL_STATIC_DRAW);
+		GL11.glVertexPointer(3, GL11.GL_FLOAT, 20, 0);
+		GL11.glTexCoordPointer(2, GL11.GL_FLOAT,20,12);
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, VBOindicesid);
+		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, ib, GL15.GL_STATIC_DRAW);
+		//That should be good!
 		//todo actually put in vbo
 	}
 
 	private void delVBO(int id){
-		glDeleteBuffersARB(VBOid);
+		glDeleteBuffersARB(VBOvertsid);
+		glDeleteBuffersARB(VBOindicesid);
 	}
 }

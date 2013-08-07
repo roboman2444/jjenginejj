@@ -1,6 +1,7 @@
 package com.jjenginejj.render;
 
 import com.jjenginejj.render.model.model;
+import com.jjenginejj.render.model.worldobjects;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.*;
@@ -130,12 +131,11 @@ public class render {
 		glLoadIdentity();// again, for shitsngiggles
 		camera.AdjustToCamera();
 		glColor3f(1.0f, 1.0f, 0.0f);
-		drawModel(model.modellist.get("untitled.obj"));
+		worldobjects.draw();
 
 		if(PostProcessEnabled){
 			postprocess.PostProcess();
 		}
-		
 
 		if(Display.wasResized())resizeDisplay();
 		Display.update();

@@ -6,9 +6,12 @@ import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 
 public class block {
-	vector3d size;
-	vector3d pos;
-	vector3d rotation;
+	//vector3d size;
+	//vector3d pos;
+	//vector3d rotation;
+	public final float[] size = new float[3];
+	public final float[] pos = new float[3];
+	public final float[] rotation = new float[3];
 	model m;
 	//com.com.jjenginejj.system.jjenginejj.system.util.vector3d color;
 	int id; // maybe idk maybe change
