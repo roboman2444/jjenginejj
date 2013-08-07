@@ -1,12 +1,10 @@
-import static org.lwjgl.opengl.EXTFramebufferObject.GL_COLOR_ATTACHMENT0_EXT;
-import static org.lwjgl.opengl.EXTFramebufferObject.GL_FRAMEBUFFER_EXT;
-import static org.lwjgl.opengl.EXTFramebufferObject.glBindFramebufferEXT;
-import static org.lwjgl.opengl.EXTFramebufferObject.glFramebufferTexture2DEXT;
-import static org.lwjgl.opengl.EXTFramebufferObject.glGenFramebuffersEXT;
+package com.jjenginejj.render;
+
+import org.lwjgl.opengl.GL11;
 
 import java.util.HashMap;
 
-import org.lwjgl.opengl.GL11;
+import static org.lwjgl.opengl.EXTFramebufferObject.*;
 
 
 public class Framebuffer {

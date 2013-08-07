@@ -1,4 +1,4 @@
-
+package com.jjenginejj.system.util;
 /*
  * (C) 2004 - Geotechnical Software Services
  * 
@@ -217,7 +217,7 @@ public class Matrix4x4
 	 *
 	 * @param object  Object to check.
 	 * @return        True if the two are equal, false otherwise.
-	 * @throws        ClassCastException if object is not of type Matrix4x4.
+	 * @throws        ClassCastException if object is not of type com.com.jjenginejj.system.jjenginejj.system.util.Matrix4x4.
 	 */
 	public boolean equals (Object object)
 	{
@@ -858,7 +858,7 @@ public class Matrix4x4
 	 */
 	/*public Vector4 solve (Vector4 vector)
 	{
-		Matrix4x4 inverse = new Matrix4x4 (this);
+		com.com.jjenginejj.system.jjenginejj.system.util.Matrix4x4 inverse = new com.com.jjenginejj.system.jjenginejj.system.util.Matrix4x4 (this);
 		inverse.invert();
 		Vector4 result = inverse.multiply (vector);
 		return result;

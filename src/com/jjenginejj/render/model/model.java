@@ -1,17 +1,18 @@
+package com.jjenginejj.render.model;
+
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
 public class model {
 	//todo
-	float[] verts;
-	int[]	faces;
-	int numVerts = 0;
-	int numFaces = 0;
-	int vboid = 0;
-	int vaoid = 0;
-	int vboiid = 0;
+	public float[] verts;
+	public int[]	faces;
+	public int numVerts = 0;
+	public int numFaces = 0;
+	public int vboid = 0;
+	public int vaoid = 0;
+	public int vboiid = 0;
 	public static HashMap<String, model> modellist = new HashMap<String, model>();
 	public model(){
 
@@ -39,7 +40,7 @@ public class model {
 			reader = new BufferedReader(new FileReader(f)); // stupid quick and easy way to reset to beginning o file
 			while((line=reader.readLine()) != null){
 				if(line.startsWith("v ")){
-					//m.verts.add(new vertex(Float.valueOf(line.split(" ")[1]), Float.valueOf(line.split(" ")[2]), Float.valueOf(line.split(" ")[3])));
+					//m.verts.add(new com.com.jjenginejj.system.jjenginejj.system.util.vertex(Float.valueOf(line.split(" ")[1]), Float.valueOf(line.split(" ")[2]), Float.valueOf(line.split(" ")[3])));
 					m.verts[(5*vIndex)] = Float.valueOf(line.split(" ")[1]);
 					m.verts[(5*vIndex)+1] = Float.valueOf(line.split(" ")[2]);
 					m.verts[(5*vIndex)+2] = Float.valueOf(line.split(" ")[3]);
@@ -58,7 +59,7 @@ public class model {
 			}
 
 
-			System.out.println("loaded model " + filename +" with "+ m.numVerts + " verts");
+			System.out.println("loaded com.jjenginejj.render.model.model " + filename +" with "+ m.numVerts + " verts");
 			System.out.println("verts in xyzwt form " + Arrays.toString(m.verts));
 			System.out.println("faces " + Arrays.toString(m.faces));
 		}
@@ -69,17 +70,17 @@ public class model {
 
 
 
-	/*public void scale(vector3d s){
+	/*public void scale(com.com.jjenginejj.system.jjenginejj.system.util.vector3d s){
 		for(int i=0; i < verts.size(); i++){
 			verts.get(i).scale(s);
 		}
 	}
-	public void translate(vector3d t){
+	public void translate(com.com.jjenginejj.system.jjenginejj.system.util.vector3d t){
 		for(int i=0; i < verts.size(); i++){
 			verts.get(i).translate(t);
 		}
 	}
-	public void rotate(vector3d r){
+	public void rotate(com.com.jjenginejj.system.jjenginejj.system.util.vector3d r){
 		for(int i=0; i < verts.size(); i++){
 			verts.get(i).rotate(r);
 		}

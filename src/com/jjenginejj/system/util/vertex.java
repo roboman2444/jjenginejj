@@ -1,3 +1,5 @@
+package com.jjenginejj.system.util;
+
 import java.util.Arrays;
 
 public class vertex {

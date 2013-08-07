@@ -1,6 +1,8 @@
+package com.jjenginejj.system.util;
+
 public class vector3d {
-	float x;
-	float y;
+	public float x;
+	public float y;
 	float z;
 	//constructors
 	public vector3d(float ix, float iy, float iz){

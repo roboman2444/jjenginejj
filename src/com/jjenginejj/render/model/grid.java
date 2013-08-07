@@ -1,16 +1,12 @@
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL15;
+package com.jjenginejj.render.model;
 
-import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
 import java.util.ArrayList;
 
-import static org.lwjgl.opengl.ARBBufferObject.glBindBufferARB;
 import static org.lwjgl.opengl.ARBBufferObject.glDeleteBuffersARB;
 import static org.lwjgl.opengl.ARBBufferObject.glGenBuffersARB;
 
 public class grid {
-	//public HashMap<Integer, block> blocks = new HashMap(); // integer for id... wait why not arraylist
+	//public HashMap<Integer, com.jjjenginejj.render.com.jjenginejj.render.model.model.block> blocks = new HashMap(); // integer for id... wait why not arraylist
 	public ArrayList<block> blocks = new ArrayList();
 	public int vVBOid;
 	//todo add constuctor
@@ -20,7 +16,7 @@ public class grid {
 
 	}
 	public void addBlock(block b){
-		//add block to cubearray
+		//add com.jjjenginejj.render.com.jjenginejj.render.model.model.block to cubearray
 		b.id = blocks.size(); //TODO i gotta check if it should be blocks.size or blocks.zie + 1;
 		blocks.add(b);
 		// update whole vbo for cubearray
@@ -28,7 +24,7 @@ public class grid {
 
 	}
 	public void deleteBlock(int id){
-		//delete the block from the cubearray
+		//delete the com.jjjenginejj.render.com.jjenginejj.render.model.model.block from the cubearray
 		// if i dont have any cubes, remove vbo.
 		//regenerate vbobuffer
 	}
