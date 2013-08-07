@@ -1,5 +1,9 @@
 package com.jjenginejj.render.model;
 
+import org.lwjgl.BufferUtils;
+
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 import java.util.ArrayList;
 
 import static org.lwjgl.opengl.ARBBufferObject.glDeleteBuffersARB;
@@ -8,11 +12,11 @@ import static org.lwjgl.opengl.ARBBufferObject.glGenBuffersARB;
 public class grid {
 	//public HashMap<Integer, com.jjjenginejj.render.com.jjenginejj.render.model.model.block> blocks = new HashMap(); // integer for id... wait why not arraylist
 	public ArrayList<block> blocks = new ArrayList();
-	public int vVBOid;
+	public int VBOid;
 	//todo add constuctor
 	//constructor will generate vbo for itself
 	public grid(){
-		vVBOid = glGenBuffersARB();
+		VBOid = glGenBuffersARB();
 
 	}
 	public void addBlock(block b){
@@ -20,7 +24,7 @@ public class grid {
 		b.id = blocks.size(); //TODO i gotta check if it should be blocks.size or blocks.zie + 1;
 		blocks.add(b);
 		// update whole vbo for cubearray
-
+		genverts();//YESH
 
 	}
 	public void deleteBlock(int id){
@@ -32,40 +36,29 @@ public class grid {
 
 		//generates them verts
 		//todo return something useful
-		for( int i =0; i < blocks.size(); i++){
+		int vertcount = 0;
+		int tricount = 0;
+		for(int i =0; i< blocks.size(); i++){ 			//todo maybe put counting in a less used function... but it wont speed up that much, not like its being called often
+			block b = blocks.get(i); // small speed up?
+			vertcount += b.m.numVerts;
+			tricount  += b.m.numFaces;
+		}
+		FloatBuffer vb = BufferUtils.createFloatBuffer(vertcount * 5);
+		IntBuffer ib = BufferUtils.createIntBuffer(tricount * 3);
+		int vertoffset = 0;
+		for(int i =0; i < blocks.size(); i++){
 			//todo
-
+			block b = blocks.get(i); // small speed up?
+			vb.put(b.toVBOVerts());
+			ib.put(b.toVBOIndices(vertoffset));
+			vertoffset += b.m.numVerts; // should work
 		}
+		ib.flip(); // back to 0
+		vb.flip();
+		//todo actually put in vbo
 	}
-	/*public void dataToVBO(){
-		glBindBufferARB(GL15.GL_ARRAY_BUFFER, vVBOid);
-		int numOfVerts = 0;
-		int numOfTris = 0;
-		for(int i=0; i < blocks.size(); i++){
-			numOfVerts += blocks.get(i).m.verts.size();
-			numOfTris += blocks.get(i).m.tris.size();
-		}
-		FloatBuffer verts =  BufferUtils.createFloatBuffer(numOfVerts*9);
 
-		ByteBuffer tris =  BufferUtils.createByteBuffer(numOfVerts*3*4);
-
-		int indexOfVerts = 0;
-		int indexOfTris = 0;
-		for(int i=0; i < blocks.size(); i++){
-			verts.put(blocks.get(i).genVerts());
-			tris.put(blocks.get(i).genTris(indexOfVerts*9));
-			numOfVerts += blocks.get(i).m.verts.size();
-			numOfTris += blocks.get(i).m.tris.size();
-
-		}
-		tris.flip();
-		verts.flip();
-		//glBufferDataARB( type , SIZEDA, DATA, GL_STATIC_DRAW_ARB)
-		//type is likely GL_ARRAY_BUFFER_ARB
-
-	}
 	private void delVBO(int id){
-		glDeleteBuffersARB(vVBOid);
+		glDeleteBuffersARB(VBOid);
 	}
-	*/
 }

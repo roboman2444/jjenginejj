@@ -40,10 +40,19 @@ public class block {
 		return data;
 	}
 	*/
-	public FloatBuffer genVerts(){
-		return null;
+
+	public int[] toVBOIndices(int offset){
+		int[] indices = m.faces;
+		for(int i = 0; i<m.numFaces*3; i++){
+			indices[i] += offset; // that SHOULD work
+		}
+		return indices;
 	}
-	public ByteBuffer genTris(int index){
-		return null;
+	public float[] toVBOVerts(){
+		//todo scale
+		//todo rotate
+		//todo translate
+		float[] verts = m.verts;
+		return verts;
 	}
 }
