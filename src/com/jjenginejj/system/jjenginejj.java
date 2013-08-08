@@ -1,8 +1,11 @@
 package com.jjenginejj.system;
 
+import com.jjenginejj.render.camera;
 import com.jjenginejj.render.model;
 import com.jjenginejj.render.render;
 import com.jjenginejj.test.gamecode;
+import com.jjenginejj.world.block;
+import com.jjenginejj.world.worldobjects;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,11 +31,26 @@ public class jjenginejj {
 		input.init();
 		gamecode.init();
 		try {
-			model.loadModel("untitled.obj");
+			model.loadModel("cube.obj");
 		} catch (IOException e) {
 			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
 		}
+		for(int i = 0; i< 500; i++){
+			block b = new block();
+			try {
+				b.m = model.loadModel("untitled.obj");
+			} catch (IOException e) {
+				e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+			}
+			b.pos[0] = ((float)Math.random()*500)-250;
+			b.pos[1] = ((float)Math.random()*500)-250;
+			b.pos[2] = ((float)Math.random()*500)-250;
+			worldobjects.addBlock(b);
+		}
+
+		worldobjects.getData();
 		while(true){
+			//camera.rotz+= 1;
 			render.draw();
 			gamecode.run();
 			input.getInput();

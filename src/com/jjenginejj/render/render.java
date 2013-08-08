@@ -20,6 +20,7 @@ public class render {
 	public static int PostProcessBloomBlurPasses = 2;
 	public static int sizeX = 800;
 	public static int sizeY = 600;
+	private static int temprot = 0; //todo remove
 	public static void toggleFS() {
 		try {
 			Display.setFullscreen(!Display.isFullscreen());
@@ -55,9 +56,9 @@ public class render {
 		// init OpenGL
 
 		glDepthFunc(GL_LEQUAL);
-		glDisable(GL_DEPTH_TEST); // depth testing, yo
+		glEnable(GL_DEPTH_TEST); // depth testing, yo
 		glBlendFunc(GL_SRC_ALPHA,GL_ONE);
-		glEnable(GL_BLEND);
+		glDisable(GL_BLEND);
 		glShadeModel (GL_SMOOTH);
 
 
@@ -84,7 +85,7 @@ public class render {
 	}
 	public static void drawModel(model m){
 		if(m.vboid == 0){
-			System.out.println("making vbo for com.jjenginejj.render.model ");
+			System.out.println("making vbo for model ");
 			IntBuffer fb = BufferUtils.createIntBuffer(m.numFaces*3);
 			FloatBuffer vb = BufferUtils.createFloatBuffer(m.numVerts*5);
 			vb.put(m.verts);
@@ -116,9 +117,9 @@ public class render {
 
 	}
 	public static void draw() {
-		glDisable(GL_TEXTURE_2D);
-		glEnable(GL_BLEND);
-		glDisable(GL_DEPTH_TEST); // depth testing, yo
+		//glEnable(GL_TEXTURE_2D);
+		//glEnable(GL_BLEND);
+		//glEnable(GL_DEPTH_TEST); // depth testing, yo
 		GL20.glUseProgram(0);
 
 		switchToPerspective();
@@ -129,6 +130,8 @@ public class render {
 		//glMatrixMode(GL_MODELVIEW);//just fo shitsngiggles
 		glLoadIdentity();// again, for shitsngiggles
 		camera.AdjustToCamera();
+		rotateCrap(0,(float)temprot,  0);
+		temprot ++;
 		glColor3f(1.0f, 1.0f, 0.0f);
 		worldobjects.draw();
 
