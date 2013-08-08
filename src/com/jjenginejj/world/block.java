@@ -1,7 +1,6 @@
 package com.jjenginejj.world;
 
 import com.jjenginejj.render.model;
-import com.jjenginejj.system.util.vector3d;
 
 public class block {
 	//vector3d size;
