@@ -67,6 +67,7 @@ public class Matrix4x4{
 			return new Matrix4x4(m);
 		//}
 	}
+	/*
 	public float[] void transform(Matrix4x4 in, final float v[]){
 		float[] out = new float[3];
 		out[0] = v[0] * in->m[0][0] + v[1] * in->m[0][1] + v[2] * in[0][2] + in->m[0][3];
@@ -74,7 +75,7 @@ public class Matrix4x4{
 		out[2] = v[0] * in->m[2][0] + v[1] * in->m[2][1] + v[2] * in[2][2] + in.get[2][3];
 
 
-	}
+	} */
 	public Matrix4x4()
 	{
 		initialize();

@@ -33,8 +33,11 @@ public class grid {
 		b.id = blocks.size(); //TODO i gotta check if it should be blocks.size or blocks.zie + 1;
 		blocks.add(b);
 		// update whole vbo for cubearray
+		//genverts();//YESH
+	}
+	public void tupdate(){
 		genverts();//YESH
-
+		System.out.println(x +"x" + y + " " + vertcount+ " " + VBOvertsid+ " " + tricount + " " + VBOindicesid );
 	}
 	public void deleteBlock(int id){
 		//delete the com.jjjenginejj.render.com.jjenginejj.render.model.block from the cubearray

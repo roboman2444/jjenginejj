@@ -20,11 +20,16 @@ public class worldobjects {
 		}
 		grid g = new grid(tx, ty);
 		g.addBlock(b);
+		grids.add(g);
 	}
 	public static void draw(){
-		for (int i = 0; i<grids.size(); i++){
-			grid g = grids.get(i);
+		for (grid g : grids) {
 			g.draw();
+		}
+	}
+	public static void getData(){
+		for (grid g : grids) {
+			g.tupdate();//todo change to just genverts
 		}
 	}
 	public static void deleteBlock(){//maybe use ids, idk yet
