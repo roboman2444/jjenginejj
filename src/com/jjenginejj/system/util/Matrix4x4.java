@@ -26,8 +26,7 @@ package com.jjenginejj.system.util;
  *
  * @author <a href="mailto:info@geosoft.no">GeoSoft</a>
  */
-public class Matrix4x4
-{
+public class Matrix4x4{
 	private double[]  m_;  // of 16
 
 
@@ -35,6 +34,47 @@ public class Matrix4x4
 	/**
 	 * Construct a 4x4 identity matrix.
 	 */
+
+	public static Matrix4x4 createFromEntity(float[] pos, float[] rot, float[] scale){
+		double[] m = new double[16];
+		double angle, sr, sp, sy, cr, cp, cy;
+		//if(rot[2]!=0){ //NO SPEEDUP FOR U
+			angle = rot[1] * (Math.PI /180);
+			sy = Math.sin(angle);
+			cy = Math.cos(angle);
+			angle = rot[0] * (Math.PI /180);
+			sp = Math.sin(angle);
+			cp = Math.cos(angle);
+			angle = rot[2] * (Math.PI /180);
+			sr = Math.sin(angle);
+			cr = Math.cos(angle);
+			m[0] = (cp*cy) * scale[0];
+			m[1] = (sr*sp*cy+cr*-sy) * scale[0];
+			m[2] = (cr*sp*cy+-sr*-sy) * scale[0];
+			m[3] = pos[0];
+			m[4] = (cp*sy) * scale[1];
+			m[5] = (sr*sp*sy+cr*cy) * scale[1];
+			m[6] = (cr*sp*sy+-sr*cy) * scale[1];
+			m[7] = pos[1];
+			m[8] = (-sp) * scale[2];
+			m[9] = (sr*cp) * scale[2];
+			m[10] = (cr*cp) * scale[3];
+			m[11] = pos[2];
+			m[12] = 0;
+			m[13] = 0;
+			m[14] = 0;
+			m[15] = 1;
+			return new Matrix4x4(m);
+		//}
+	}
+	public float[] void transform(Matrix4x4 in, final float v[]){
+		float[] out = new float[3];
+		out[0] = v[0] * in->m[0][0] + v[1] * in->m[0][1] + v[2] * in[0][2] + in->m[0][3];
+		out[1] = v[0] * in->m[1][0] + v[1] * in->m[1][1] + v[2] * in[1][2] + in->m[1][3];
+		out[2] = v[0] * in->m[2][0] + v[1] * in->m[2][1] + v[2] * in[2][2] + in.get[2][3];
+
+
+	}
 	public Matrix4x4()
 	{
 		initialize();
