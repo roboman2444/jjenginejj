@@ -40,16 +40,18 @@ public class grid {
 		System.out.println(x +"x" + y + " " + vertcount+ " " + VBOvertsid+ " " + tricount + " " + VBOindicesid );
 	}
 	public void deleteBlock(int id){
+		blocks.remove(id);
 		//delete the com.jjjenginejj.render.com.jjenginejj.render.model.block from the cubearray
 		// if i dont have any cubes, remove vbo.
 		//regenerate vbobuffer
+		genverts();
 	}
 	public void draw(){
-		GL11.glEnableClientState(GL11.GL_VERTEX_ARRAY);
-		GL11.glEnableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
-		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, VBOvertsid);
-		GL11.glVertexPointer(3, GL11.GL_FLOAT, 20, 0); //do i need this?
-		GL11.glTexCoordPointer(2, GL11.GL_FLOAT,20,12);
+		//GL11.glEnableClientState(GL11.GL_VERTEX_ARRAY);
+		//GL11.glEnableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
+		//GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, VBOvertsid);
+		//GL11.glVertexPointer(3, GL11.GL_FLOAT, 20, 0); //do i need this?
+		//GL11.glTexCoordPointer(2, GL11.GL_FLOAT,20,12);
 		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, VBOindicesid);
 		GL11.glDrawElements(GL11.GL_TRIANGLES, tricount*3, GL11.GL_UNSIGNED_INT,0);
 	}
@@ -58,17 +60,15 @@ public class grid {
 		//generates them verts
 		//todo return something useful
 
-		for(int i =0; i< blocks.size(); i++){ 			//todo maybe put counting in a less used function... but it wont speed up that much, not like its being called often
-			block b = blocks.get(i); // small speed up?
+		for (block b : blocks) {                        //todo maybe put counting in a less used function... but it wont speed up that much, not like its being called often
 			vertcount += b.m.numVerts;
-			tricount  += b.m.numFaces;
+			tricount += b.m.numFaces;
 		}
 		FloatBuffer vb = BufferUtils.createFloatBuffer(vertcount * 5);
 		IntBuffer ib = BufferUtils.createIntBuffer(tricount * 3);
 		int vertoffset = 0;
-		for(int i =0; i < blocks.size(); i++){
+		for (block b : blocks) {
 			//todo
-			block b = blocks.get(i); // small speed up?
 			vb.put(b.toVBOVerts());
 			ib.put(b.toVBOIndices(vertoffset));
 			vertoffset += b.m.numVerts; // should work

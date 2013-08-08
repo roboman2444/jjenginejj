@@ -20,6 +20,7 @@ public class render {
 	public static int PostProcessBloomBlurPasses = 2;
 	public static int sizeX = 800;
 	public static int sizeY = 600;
+
 	private static int temprot = 0; //todo remove
 	public static void toggleFS() {
 		try {
@@ -60,6 +61,10 @@ public class render {
 		glBlendFunc(GL_SRC_ALPHA,GL_ONE);
 		glDisable(GL_BLEND);
 		glShadeModel (GL_SMOOTH);
+		GL11.glEnableClientState(GL11.GL_VERTEX_ARRAY);
+		GL11.glEnableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_FRONT);
 
 
 		resizeDisplay();
@@ -131,7 +136,7 @@ public class render {
 		glLoadIdentity();// again, for shitsngiggles
 		camera.AdjustToCamera();
 		rotateCrap(0,(float)temprot,  0);
-		temprot ++;
+		temprot++;
 		glColor3f(1.0f, 1.0f, 0.0f);
 		worldobjects.draw();
 

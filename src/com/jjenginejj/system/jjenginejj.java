@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.util.Locale;
 
 public class jjenginejj {
+	private static int fpsCounter = 0;
+	public static float timescale = 0.1f;
+	private static float fpsTotalTime = 0;
 	static {
 		String lwjgl_folder = "libs" + File.separator;
 		final String OS = System.getProperty("os.name").toLowerCase(Locale.ENGLISH);
@@ -35,25 +38,36 @@ public class jjenginejj {
 		} catch (IOException e) {
 			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
 		}
-		for(int i = 0; i< 500; i++){
+		for(int i = 0; i< 10000; i++){
 			block b = new block();
 			try {
 				b.m = model.loadModel("untitled.obj");
 			} catch (IOException e) {
 				e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
 			}
-			b.pos[0] = ((float)Math.random()*500)-250;
-			b.pos[1] = ((float)Math.random()*500)-250;
-			b.pos[2] = ((float)Math.random()*500)-250;
+			b.pos[0] = ((float)Math.random()*5000)-2500;
+			b.pos[1] = ((float)Math.random()*5000)-2500;
+			b.pos[2] = ((float)Math.random()*5000)-2500;
 			worldobjects.addBlock(b);
 		}
 
 		worldobjects.getData();
+		long lasttime = System.currentTimeMillis();
 		while(true){
+			long time = System.currentTimeMillis();
+			timescale = (time-lasttime)/100.0f;
 			//camera.rotz+= 1;
 			render.draw();
 			gamecode.run();
 			input.getInput();
+			fpsTotalTime += timescale;
+			fpsCounter ++;
+			if(fpsCounter == 100){
+				fpsCounter = 0;
+				System.out.println("fps: "+ 1000/fpsTotalTime);
+				fpsTotalTime = 0;
+			}
+			lasttime = time;
 		}
 
 	}

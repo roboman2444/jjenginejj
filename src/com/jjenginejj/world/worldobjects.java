@@ -26,6 +26,7 @@ public class worldobjects {
 		for (grid g : grids) {
 			g.draw();
 		}
+
 	}
 	public static void getData(){
 		for (grid g : grids) {
