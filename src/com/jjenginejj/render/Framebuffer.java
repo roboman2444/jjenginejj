@@ -12,7 +12,7 @@ public class Framebuffer {
 	int framebufferID, textureID, depthID;
 	public static HashMap<String, Framebuffer> framebufferList = new HashMap<String, Framebuffer>();
 	public Framebuffer(int x, int y, boolean depth){
-		//set up texture
+		//set up Texture
 		textureID= GL11.glGenTextures();
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID);
 			GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
