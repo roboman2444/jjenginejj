@@ -1,19 +1,29 @@
 package com.jjenginejj.entity;
 
+import com.jjenginejj.render.model;
+import com.jjenginejj.render.texture.Texture;
 import com.jjenginejj.sound.Sound;
 import com.jjenginejj.sound.SoundSystem;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Entity implements Serializable {
     private static final ArrayList<Entity> entities = new ArrayList<Entity>();
+    private static boolean sorted;
     protected int ID;
     protected final float[] pos = new float[3];
     protected boolean isNetwork;
     protected boolean isPlayingSound;
     protected Sound currentSound;
+    protected model _model;
+    protected Texture texture;
+
+    public static List<Entity> getEntities() {
+	return entities;
+    }
 
     public static Entity createEntity() {
 	Entity e = new Entity();
@@ -27,6 +37,18 @@ public class Entity implements Serializable {
 	e.pos[0] = x;
 	e.pos[1] = y;
 	e.pos[2] = z;
+	return e;
+    }
+
+    public static Entity createEntity(model _model) {
+	Entity e = createEntity();
+	e.setModel(_model);
+	return e;
+    }
+
+    public static Entity createEntity(model _model, Texture texture) {
+	Entity e = createEntity(_model);
+	e.texture = texture;
 	return e;
     }
 
@@ -46,27 +68,59 @@ public class Entity implements Serializable {
 
     public void setX(float x) {
 	pos[0] = x;
-	if (selectedSound != null) {
-	    selectedSound.setPos(pos[0], pos[1], pos[2]);
+	if (currentSound != null) {
+	    currentSound.setPos(pos[0], pos[1], pos[2]);
 	}
     }
 
     public void setY(float y) {
 	pos[1] = y;
-	if (selectedSound != null) {
-	    selectedSound.setPos(pos[0], pos[1], pos[2]);
+	if (currentSound != null) {
+	    currentSound.setPos(pos[0], pos[1], pos[2]);
 	}
     }
 
     public void setZ(float z) {
 	pos[3] = z;
-	if (selectedSound != null) {
-	    selectedSound.setPos(pos[0], pos[1], pos[2]);
+	if (currentSound != null) {
+	    currentSound.setPos(pos[0], pos[1], pos[2]);
 	}
     }
 
     public boolean isNetworkEntity() {
 	return isNetwork;
+    }
+
+    public int getTextureID() {
+	return texture.textureID;
+    }
+
+    public Texture getTextureObject() {
+	return texture;
+    }
+
+    public model getModel() {
+	return _model;
+    }
+
+    public boolean hasModel() {
+	return _model != null;
+    }
+
+    public void setModel(model _model) {
+	if (this._model != null)
+	    this._model.detachEntity(this);
+
+	if (_model == null)
+	    this._model = null;
+	else {
+	    this._model = _model;
+	    this._model.attachEntity(this);
+	}
+    }
+
+    public void removeModel() {
+	setModel(null);
     }
 
     public void playSound(String file) throws IOException {
@@ -79,22 +133,20 @@ public class Entity implements Serializable {
 
 	playSound(s);
     }
-
-    private Sound selectedSound;
     public void playSound(Sound sound) {
-	selectedSound = sound;
+	currentSound = sound;
 	sound.setPos(pos[0], pos[1], pos[2]);
 	sound.play();
 	isPlayingSound = true;
     }
 
     public Sound getCurrentSound() {
-	return selectedSound;
+	return currentSound;
     }
 
     public void playCurrentSound() {
-	if (selectedSound != null)
-	    selectedSound.play();
+	if (currentSound != null)
+	    currentSound.play();
     }
 
     public int getID() {

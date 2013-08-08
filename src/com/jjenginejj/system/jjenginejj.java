@@ -1,6 +1,5 @@
 package com.jjenginejj.system;
 
-import com.jjenginejj.render.camera;
 import com.jjenginejj.render.model;
 import com.jjenginejj.render.render;
 import com.jjenginejj.test.gamecode;
