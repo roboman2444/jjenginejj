@@ -1,6 +1,5 @@
 package com.jjenginejj.render;
 
-import com.jjenginejj.render.model.model;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.*;
@@ -24,7 +23,7 @@ public class render {
 		try {
 			Display.setFullscreen(!Display.isFullscreen());
 		} catch (LWJGLException e) {
-			// TODO Auto-generated catch com.jjjenginejj.render.com.jjenginejj.render.model.model.block
+			// TODO Auto-generated catch com.jjjenginejj.render.com.jjenginejj.render.model.block
 			e.printStackTrace();
 		}
 		resizeDisplay();
@@ -84,7 +83,7 @@ public class render {
 	}
 	public static void drawModel(model m){
 		if(m.vboid == 0){
-			System.out.println("making vbo for com.jjenginejj.render.model.model ");
+			System.out.println("making vbo for com.jjenginejj.render.model ");
 			IntBuffer fb = BufferUtils.createIntBuffer(m.numFaces*3);
 			FloatBuffer vb = BufferUtils.createFloatBuffer(m.numVerts*5);
 			vb.put(m.verts);

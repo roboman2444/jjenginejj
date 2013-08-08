@@ -1,17 +1,15 @@
-package com.jjenginejj.render.model;
+package com.jjenginejj.world;
 
+import com.jjenginejj.render.model;
 import com.jjenginejj.system.util.vector3d;
-
-import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
 
 public class block {
 	vector3d size;
-	vector3d pos;
+	public vector3d pos;
 	vector3d rotation;
-	model m;
+	public model m;
 	//com.com.jjenginejj.system.jjenginejj.system.util.vector3d color;
-	int id; // maybe idk maybe change
+	public int id; // maybe idk maybe change
 	//todo add other shit
 	//todo add constuctors or something
 	/*

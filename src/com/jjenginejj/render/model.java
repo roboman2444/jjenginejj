@@ -1,4 +1,4 @@
-package com.jjenginejj.render.model;
+package com.jjenginejj.render;
 
 import java.io.*;
 import java.util.Arrays;
@@ -59,7 +59,7 @@ public class model {
 			}
 
 
-			System.out.println("loaded com.jjenginejj.render.model.model " + filename +" with "+ m.numVerts + " verts");
+			System.out.println("loaded com.jjenginejj.render.model " + filename +" with "+ m.numVerts + " verts");
 			System.out.println("verts in xyzwt form " + Arrays.toString(m.verts));
 			System.out.println("faces " + Arrays.toString(m.faces));
 		}
