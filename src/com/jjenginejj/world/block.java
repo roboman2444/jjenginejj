@@ -45,7 +45,7 @@ public class block {
 	public int[] toVBOIndices(int offset){
 		int[] indices = m.faces;
 		for(int i = 0; i<m.numFaces*3; i++){
-			indices[i] += offset; // that SHOULD work
+			indices[i] += offset-1; // that SHOULD work
 		}
 		return indices;
 	}
