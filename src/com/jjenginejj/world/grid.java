@@ -1,4 +1,4 @@
-package com.jjenginejj.render.model;
+package com.jjenginejj.world;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
@@ -29,7 +29,7 @@ public class grid {
 
 	}
 	public void addBlock(block b){
-		//add com.jjjenginejj.render.com.jjenginejj.render.model.model.block to cubearray
+		//add com.jjjenginejj.render.com.jjenginejj.render.model.block to cubearray
 		b.id = blocks.size(); //TODO i gotta check if it should be blocks.size or blocks.zie + 1;
 		blocks.add(b);
 		// update whole vbo for cubearray
@@ -37,7 +37,7 @@ public class grid {
 
 	}
 	public void deleteBlock(int id){
-		//delete the com.jjjenginejj.render.com.jjenginejj.render.model.model.block from the cubearray
+		//delete the com.jjjenginejj.render.com.jjenginejj.render.model.block from the cubearray
 		// if i dont have any cubes, remove vbo.
 		//regenerate vbobuffer
 	}

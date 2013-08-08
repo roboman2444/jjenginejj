@@ -1,4 +1,4 @@
-package com.jjenginejj.render.model;
+package com.jjenginejj.render;
 
 import java.io.*;
 import java.util.Arrays;

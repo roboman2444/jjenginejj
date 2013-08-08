@@ -9,24 +9,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class SoundSystem {
-    private List<Sound> loadedSounds = new ArrayList<>();
+    private static List<Sound> loadedSounds = new ArrayList<Sound>();
 
-    public Sound loadSound(String name, String filePath) throws IOException {
+    public static Sound loadSound(String name, String filePath) throws IOException {
         if (exists(name)) {
             throw new IllegalArgumentException("The specified sound name is already registered!");
         }
         WaveData wavFile;
         String resource = "sound" + File.separator + filePath;
-        InputStream stream = getClass().getClassLoader().getResourceAsStream(resource);
+        InputStream stream = SoundSystem.class.getClassLoader().getResourceAsStream(resource);
         if (stream == null) {
             resource = "sound/" + filePath;
-            stream = getClass().getClassLoader().getResourceAsStream(resource);
+            stream = SoundSystem.class.getClassLoader().getResourceAsStream(resource);
             if (stream == null)
                 throw new IOException("Can't find sound \"" + resource + "\"!");
         }
         wavFile = WaveData.create(stream);
         if (wavFile == null) {
-            URL url = getClass().getClassLoader().getResource(resource);
+            URL url = SoundSystem.class.getClassLoader().getResource(resource);
             wavFile = WaveData.create(url);
             if (wavFile == null)
                 throw new IOException("Failed to create WaveData for \"" + resource + "\"!");
@@ -45,7 +45,7 @@ public final class SoundSystem {
         return sound;
     }
 
-    public boolean exists(String name) {
+    public static boolean exists(String name) {
         for (Sound sound : loadedSounds) {
             if (sound.getName().equals(name)) {
                 return true;
@@ -54,7 +54,7 @@ public final class SoundSystem {
         return false;
     }
 
-    public Sound getSound(String name) {
+    public static Sound getSound(String name) {
         for (Sound sound : loadedSounds) {
             if (sound.getName().equals(name)) {
                 return sound;
@@ -64,7 +64,7 @@ public final class SoundSystem {
     }
 
 
-    public void unloadSound(String name) {
+    public static  void unloadSound(String name) {
         Sound sound = getSound(name);
 
         if (sound == null) {
