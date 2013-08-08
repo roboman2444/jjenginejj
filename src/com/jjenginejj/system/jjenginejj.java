@@ -4,8 +4,10 @@ import com.jjenginejj.render.camera;
 import com.jjenginejj.render.model;
 import com.jjenginejj.render.render;
 import com.jjenginejj.test.gamecode;
+import com.jjenginejj.test.physics;
 import com.jjenginejj.world.block;
 import com.jjenginejj.world.worldobjects;
+import org.lwjgl.opengl.Display;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +35,7 @@ public class jjenginejj {
 		render.init();
 		input.init();
 		gamecode.init();
+		physics.init();
 		try {
 			model.loadModel("cube.obj");
 		} catch (IOException e) {
@@ -64,7 +67,8 @@ public class jjenginejj {
 			fpsCounter ++;
 			if(fpsCounter == 100){
 				fpsCounter = 0;
-				System.out.println("fps: "+ 1000/fpsTotalTime);
+				//System.out.println("fps: "+ 1000/fpsTotalTime);
+				Display.setTitle("fps: "+1000/fpsTotalTime);
 				fpsTotalTime = 0;
 			}
 			lasttime = time;

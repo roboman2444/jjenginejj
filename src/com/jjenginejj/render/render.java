@@ -51,6 +51,7 @@ public class render {
 			e.printStackTrace();
 			System.exit(0);
 		}
+		Display.setTitle("jjenginejj");
 
 		Shader.initShader();
 	//	com.jjjenginejj.com.jjenginejj.render.render.Framebuffer.initFramebuffers();
@@ -58,13 +59,14 @@ public class render {
 
 		glDepthFunc(GL_LEQUAL);
 		glEnable(GL_DEPTH_TEST); // depth testing, yo
+		glDepthFunc(GL_LEQUAL);
 		glBlendFunc(GL_SRC_ALPHA,GL_ONE);
 		glDisable(GL_BLEND);
 		glShadeModel (GL_SMOOTH);
 		GL11.glEnableClientState(GL11.GL_VERTEX_ARRAY);
 		GL11.glEnableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
 		glEnable(GL_CULL_FACE);
-		glCullFace(GL_FRONT);
+		glCullFace(GL_BACK);
 
 
 		resizeDisplay();

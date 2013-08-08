@@ -76,11 +76,13 @@ public class grid {
 		ib.flip(); // back to 0
 		vb.flip();
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, VBOvertsid);
-		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, vb, GL15.GL_STATIC_DRAW);
+		//GL15.glBufferData(GL15.GL_ARRAY_BUFFER, vb, GL15.GL_STATIC_DRAW);
+		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, vb, GL15.GL_STATIC_READ);
 		GL11.glVertexPointer(3, GL11.GL_FLOAT, 20, 0);
 		GL11.glTexCoordPointer(2, GL11.GL_FLOAT,20,12);
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, VBOindicesid);
-		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, ib, GL15.GL_STATIC_DRAW);
+		//GL15.glBufferData(GL15.GL_ARRAY_BUFFER, ib, GL15.GL_STATIC_DRAW);
+		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, ib, GL15.GL_STATIC_READ);
 		//That should be good!
 		//todo actually put in vbo
 	}
