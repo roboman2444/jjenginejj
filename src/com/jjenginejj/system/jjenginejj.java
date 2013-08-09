@@ -35,21 +35,22 @@ public class jjenginejj {
 		input.init();
 		gamecode.init();
 		physics.init();
-		try {
-			model.loadModel("cube.obj");
-		} catch (IOException e) {
-			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-		}
-		for(int i = 0; i< 10000; i++){
+		for(int i = 0; i< 1000; i++){
 			block b = new block();
 			try {
 				b.m = model.loadModel("untitled.obj");
 			} catch (IOException e) {
 				e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
 			}
-			b.pos[0] = ((float)Math.random()*5000)-2500;
-			b.pos[1] = ((float)Math.random()*5000)-2500;
-			b.pos[2] = ((float)Math.random()*5000)-2500;
+			b.size[0] = 1;
+			b.size[1] = 1;
+			b.size[2] = 1;
+			b.rotation[0] = 0;
+			b.rotation[1] = 0;
+			b.rotation[2] = 0;
+			b.pos[0] = ((float)Math.random()*1f);
+			b.pos[1] = ((float)Math.random()*1f);
+			b.pos[2] = ((float)Math.random()*1f);
 			worldobjects.addBlock(b);
 		}
 

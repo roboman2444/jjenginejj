@@ -34,7 +34,6 @@ public class Matrix4x4{
 	/**
 	 * Construct a 4x4 identity matrix.
 	 */
-
 	public static Matrix4x4 createFromEntity(float[] pos, float[] rot, float[] scale){
 		double[] m = new double[16];
 		double angle, sr, sp, sy, cr, cp, cy;
@@ -58,7 +57,7 @@ public class Matrix4x4{
 			m[7] = pos[1];
 			m[8] = (-sp) * scale[2];
 			m[9] = (sr*cp) * scale[2];
-			m[10] = (cr*cp) * scale[3];
+			m[10] = (cr*cp) * scale[2];
 			m[11] = pos[2];
 			m[12] = 0;
 			m[13] = 0;
@@ -67,15 +66,14 @@ public class Matrix4x4{
 			return new Matrix4x4(m);
 		//}
 	}
-	/*
-	public float[] void transform(Matrix4x4 in, final float v[]){
+
+	public static float[] transform(Matrix4x4 in, final float v[]){
 		float[] out = new float[3];
-		out[0] = v[0] * in->m[0][0] + v[1] * in->m[0][1] + v[2] * in[0][2] + in->m[0][3];
-		out[1] = v[0] * in->m[1][0] + v[1] * in->m[1][1] + v[2] * in[1][2] + in->m[1][3];
-		out[2] = v[0] * in->m[2][0] + v[1] * in->m[2][1] + v[2] * in[2][2] + in.get[2][3];
-
-
-	} */
+		out[0] = (float)(v[0] * in.m_[0] + v[1] * in.m_[1] + v[2] * in.m_[2] + in.m_[3]);
+		out[1] = (float)(v[0] * in.m_[4] + v[1] * in.m_[5] + v[2] * in.m_[6] + in.m_[7]);
+		out[2] = (float)(v[0] * in.m_[8] + v[1] * in.m_[9] + v[2] * in.m_[10] + in.m_[11]);
+		return out;
+	}
 	public Matrix4x4()
 	{
 		initialize();

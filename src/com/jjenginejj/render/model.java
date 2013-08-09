@@ -1,21 +1,28 @@
 package com.jjenginejj.render;
 
 import com.jjenginejj.entity.Entity;
+import com.jjenginejj.world.block;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL15;
 
 import java.io.*;
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import static org.lwjgl.opengl.ARBBufferObject.glGenBuffersARB;
+
 public class model {
     //todo
     public float[] verts;
-    public int[]	faces;
+    public int[]   faces;
     public int numVerts = 0;
     public int numFaces = 0;
-    public int vboid = 0;
-    public int vaoid = 0;
-    public int vboiid = 0;
+    public int VBOindicesid = 0;
+    public int VBOvertsid = 0;
     private ArrayList<Entity> entities = new ArrayList<Entity>();
     public static HashMap<String, model> modellist = new HashMap<String, model>();
     public model(){
@@ -68,7 +75,30 @@ public class model {
 
 	return m;
     }
+    public void genVBO(){
+	    //generates them verts
+	    //todo return something useful
+	    VBOvertsid = glGenBuffersARB();
+	    VBOindicesid = glGenBuffersARB();
 
+	    FloatBuffer vb = BufferUtils.createFloatBuffer(numVerts * 5);
+	    IntBuffer ib = BufferUtils.createIntBuffer(numFaces * 3);
+	    int vertoffset = 0;
+	    vb.put(verts);
+	    ib.put(faces);
+	    ib.flip(); // back to 0
+	    vb.flip();
+	    GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, VBOvertsid);
+	    //GL15.glBufferData(GL15.GL_ARRAY_BUFFER, vb, GL15.GL_STATIC_DRAW);
+	    GL15.glBufferData(GL15.GL_ARRAY_BUFFER, vb, GL15.GL_STATIC_READ);
+	    GL11.glVertexPointer(3, GL11.GL_FLOAT, 20, 0);
+	    GL11.glTexCoordPointer(2, GL11.GL_FLOAT, 20, 12);
+	    GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, VBOindicesid);
+	    //GL15.glBufferData(GL15.GL_ARRAY_BUFFER, ib, GL15.GL_STATIC_DRAW);
+	    GL15.glBufferData(GL15.GL_ARRAY_BUFFER, ib, GL15.GL_STATIC_READ);
+	    //That should be good!
+	    //todo actually put in vbo
+    }
     public void detachEntity(Entity e) {
 	if (entities.contains(e))
 	    entities.remove(e);

@@ -29,8 +29,14 @@ public class gamecode {
 
 		} else pauseReleased = true;
 
+
 		//com.jjjenginejj.com.jjenginejj.render.render.camera.posy += 0.1f;
 		*/
+		if(input.keyM){
+			if(mReleased)input.toggleMouseSnap();
+			mReleased = false;
+
+		} else mReleased = true;
 	}
 	/*
 	 * makeVectors(float pan, float tilt);

@@ -78,7 +78,7 @@ public class render {
 		glViewport(0, 0, x, y);
 		glMatrixMode(GL_PROJECTION);// Select The Projection Matrix
 		glLoadIdentity();// Reset The Projection Matrix
-		gluPerspective(camera.fov,(float)x/(float)y, 0.1f,100.0f);
+		gluPerspective(camera.fov,(float)x/(float)y, 0.1f,1000.0f);
 		glMatrixMode(GL_MODELVIEW);                     // Select The Modelview Matrix
 		glLoadIdentity();                           // Reset The Modelview Matrix
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
@@ -90,38 +90,7 @@ public class render {
 		//com.jjjenginejj.com.jjenginejj.render.render.Framebuffer.framebufferList.get("flareOut").resizeFramebuffer(x, y);
 		System.out.println("Window resized to " + sizeX + "x" + sizeY);
 	}
-	public static void drawModel(model m){
-		if(m.vboid == 0){
-			System.out.println("making vbo for model ");
-			IntBuffer fb = BufferUtils.createIntBuffer(m.numFaces*3);
-			FloatBuffer vb = BufferUtils.createFloatBuffer(m.numVerts*5);
-			vb.put(m.verts);
-			fb.put(m.faces);
-			fb.flip();
-			vb.flip();
-			m.vaoid = GL30.glGenVertexArrays();
-			GL30.glBindVertexArray(m.vaoid);
-			m.vboid = GL15.glGenBuffers();
-			GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, m.vboid);
-			GL15.glBufferData(GL15.GL_ARRAY_BUFFER, vb, GL15.GL_STATIC_DRAW);
-			GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0);
-			GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
-			GL30.glBindVertexArray(0);
-
-
-			m.vboiid = GL15.glGenBuffers();
-			GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, m.vboiid);
-			GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, fb, GL15.GL_STATIC_DRAW);
-			GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
-		}
-		GL30.glBindVertexArray(m.vaoid);
-		GL20.glEnableVertexAttribArray(0);
-		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, m.vboiid);
-		GL11.glDrawElements(GL11.GL_TRIANGLES, m.numFaces*3, GL11.GL_UNSIGNED_BYTE, 0);
-		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
-		GL20.glDisableVertexAttribArray(0);
-		GL30.glBindVertexArray(0);
-
+	public static void drawEntities(){
 	}
 	public static void draw() {
 		//glEnable(GL_TEXTURE_2D);
@@ -158,7 +127,7 @@ public class render {
 	public static void switchToPerspective(){
 		glMatrixMode(GL_PROJECTION);// Select The Projection Matrix
 		glLoadIdentity();// Reset The Projection Matrix
-		gluPerspective(camera.fov,(float)sizeX/(float)sizeY, 0.1f,100.0f);
+		gluPerspective(camera.fov,(float)sizeX/(float)sizeY, 0.1f,1000.0f);
 		glMatrixMode(GL_MODELVIEW);                     // Select The Modelview Matrix
 		glLoadIdentity();                           // Reset The Modelview Matrix
 	}

@@ -1,6 +1,7 @@
 package com.jjenginejj.world;
 
 import com.jjenginejj.render.model;
+import com.jjenginejj.system.util.Matrix4x4;
 
 public class block {
 	//vector3d size;
@@ -44,15 +45,24 @@ public class block {
 	public int[] toVBOIndices(int offset){
 		int[] indices = m.faces;
 		for(int i = 0; i<m.numFaces*3; i++){
-			indices[i] += offset-1; // that SHOULD work
+			indices[i] += offset; // that SHOULD work
 		}
 		return indices;
 	}
 	public float[] toVBOVerts(){
-		//todo scale
-		//todo rotate
-		//todo translate
+		Matrix4x4 tempmatrix = Matrix4x4.createFromEntity(pos, rotation, size);
 		float[] verts = m.verts;
+		float ti[] = new float[3];
+		for(int i=0; i < m.numVerts; i++){
+			ti[0] = verts[(i*5)];
+			ti[1] = verts[(i*5)+1];
+			ti[2] = verts[(i*5)+2];
+			float[] to = Matrix4x4.transform(tempmatrix, ti);
+			verts[(i*5)] = to[0];
+			verts[(i*5)+1] = to[1];
+			verts[(i*5)+2] = to[2];
+		}
+
 		return verts;
 	}
 }
