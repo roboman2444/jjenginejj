@@ -48,26 +48,31 @@ public class worldobjects {
 		blocks_to_save.add(b);
 	    }
 	}
+	objectOutputStream.writeInt(blocks_to_save.size());
 
-	objectOutputStream.writeObject(blocks_to_save);
+	for (block b : blocks_to_save) {
+	    objectOutputStream.writeObject(b);
+	}
 
 	objectOutputStream.close();
 	gzipOutputStream.close();
 	fileOutputStream.close();
     }
 
-    public static block[] loadBlocks(String file) throws IOException, ClassNotFoundException {
+    public static void loadBlocks(String file) throws IOException, ClassNotFoundException {
 	FileInputStream fileInputStream = new FileInputStream(file);
 	GZIPInputStream gzipInputStream = new GZIPInputStream(fileInputStream);
 	ObjectInputStream objectInputStream = new ObjectInputStream(gzipInputStream);
 
-	List<block> blocks_to_load = (List<block>)objectInputStream.readObject();
+	int size = objectInputStream.readInt();
+	for (int i = 0; i < size; i++) {
+	    block b = (block)objectInputStream.readObject();
+	    addBlock(b);
+	}
 
 	objectInputStream.close();
 	gzipInputStream.close();
 	fileInputStream.close();
-
-	return blocks_to_load.toArray(new block[blocks_to_load.size()]);
     }
 
     public static void deleteBlock(){//maybe use ids, idk yet
