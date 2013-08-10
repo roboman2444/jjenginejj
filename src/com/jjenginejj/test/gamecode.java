@@ -5,6 +5,7 @@ import com.jjenginejj.system.input;
 import com.jjenginejj.system.util.Matrix4x4;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 
 public class gamecode {
 	public static float makeVectorsX;
@@ -25,59 +26,41 @@ public class gamecode {
 		tempscale[0] = 1.0f;
 		tempscale[1] = 1.0f;
 		tempscale[2] = 1.0f;
+		float dir[] = new float[3];
 		if(input.keyW){
-			float dir[] = new float[3];
-			dir[0] = 0;
-			dir[1] = 0.1f; //FORWARD BY UNIT 0.1
-			dir[2] = 0;
-			Matrix4x4 cm = Matrix4x4.createFromEntity(new float[3], camera.rot,tempscale);
-			float tempcm[] = new float[3];
-			tempcm = Matrix4x4.transform(cm, dir);
-			camera.pos[0] += tempcm[0];
-			camera.pos[1] += tempcm[1];
-			camera.pos[2] += tempcm[2];
+			dir[0] += 0;
+			dir[1] += 0.1f; //FORWARD BY UNIT 0.1
+			dir[2] += 0;
 
 		}
 		if(input.keyA){
-			float dir[] = new float[3];
-			dir[0] = 0.1f;
-			dir[1] = 0; //FORWARD BY UNIT 0.1
-			dir[2] = 0;
-			Matrix4x4 cm = Matrix4x4.createFromEntity(new float[3], camera.rot,tempscale);
-			float tempcm[] = new float[3];
-			tempcm = Matrix4x4.transform(cm, dir);
-			camera.pos[0] += tempcm[0];
-			camera.pos[1] += tempcm[1];
-			camera.pos[2] += tempcm[2];
+			dir[0] += 0.1f;
+			dir[1] += 0; //FORWARD BY UNIT 0.1
+			dir[2] += 0;
 
 		}
 		if(input.keyS){
-			float dir[] = new float[3];
-			dir[0] = 0;
-			dir[1] = -0.1f; //FORWARD BY UNIT 0.1
-			dir[2] = 0;
-			Matrix4x4 cm = Matrix4x4.createFromEntity(new float[3], camera.rot,tempscale);
-			float tempcm[] = new float[3];
-			tempcm = Matrix4x4.transform(cm, dir);
-			camera.pos[0] += tempcm[0];
-			camera.pos[1] += tempcm[1];
-			camera.pos[2] += tempcm[2];
+			dir[0] += 0;
+			dir[1] += -0.1f; //FORWARD BY UNIT 0.1
+			dir[2] += 0;
 
 		}
 		if(input.keyD){
-			float dir[] = new float[3];
-			dir[0] = -0.1f;
-			dir[1] = 0; //FORWARD BY UNIT 0.1
-			dir[2] = 0;
+			dir[0] += -0.1f;
+			dir[1] += 0; //FORWARD BY UNIT 0.1
+			dir[2] += 0;
+
+		}
+		if(dir[0]!= 0 || dir[1] != 0 || dir[2] != 0){
 			Matrix4x4 cm = Matrix4x4.createFromEntity(new float[3], camera.rot,tempscale);
 			float tempcm[] = new float[3];
 			tempcm = Matrix4x4.transform(cm, dir);
 			camera.pos[0] += tempcm[0];
 			camera.pos[1] += tempcm[1];
 			camera.pos[2] += tempcm[2];
-
 		}
 		//System.out.println("camera pos at: " + camera.pos[0] +","+ camera.pos[1] +"," +camera.pos[2]);
+
 		/*
 		if(input.keySPACE){
 			if(pauseReleased)nbody.paused = !nbody.paused;

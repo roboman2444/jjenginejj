@@ -27,7 +27,7 @@ package com.jjenginejj.system.util;
  * @author <a href="mailto:info@geosoft.no">GeoSoft</a>
  */
 public class Matrix4x4{
-	private double[]  m_;  // of 16
+	public double[]  m_;  // of 16
 
 
 
