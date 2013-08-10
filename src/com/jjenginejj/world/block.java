@@ -10,7 +10,7 @@ public class block {
 	public final float[] size = new float[3];
 	public final float[] pos = new float[3];
 	public final float[] rotation = new float[3];
-	public model m;
+	public transient model m;
 	//com.com.jjenginejj.system.jjenginejj.system.util.vector3d color;
 	public int id; // maybe idk maybe change
 	//todo add other shit
