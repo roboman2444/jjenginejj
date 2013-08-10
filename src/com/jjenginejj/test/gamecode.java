@@ -14,8 +14,8 @@ public class gamecode {
 		//com.jjenginejj.render.render.ppwhaty += 2f * nbody.timescale;
 		camera.rotz -= input.mouseDeltaX*mouseSensitivity;
 		camera.rotx += input.mouseDeltaY*mouseSensitivity;
-		if(camera.rotx > 90) camera.rotx = 90;
-		if(camera.rotx < -90) camera.rotx = -90;
+		if(camera.rotx > 180) camera.rotx = 180;
+		if(camera.rotx < 0) camera.rotx = 0;
 		if(input.keyESC)System.exit(0);
 		/*if(input.keyD){
 			makeVectors(com.jjjenginejj.com.jjenginejj.render.render.camera.rotz - 90, com.jjjenginejj.com.jjenginejj.render.render.camera.rotx);

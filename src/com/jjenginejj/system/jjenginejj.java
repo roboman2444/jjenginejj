@@ -35,6 +35,22 @@ public class jjenginejj {
 		input.init();
 		gamecode.init();
 		physics.init();
+		block plane = new block();
+		try {
+			plane.m = model.loadModel("cube.obj");
+		} catch (IOException e) {
+			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+		}
+		plane.size[0] = 1000f;
+		plane.size[1] = 1000f;
+		plane.size[2] = 0f;
+		plane.rotation[0] = 0;
+		plane.rotation[1] = 0;
+		plane.rotation[2] = 0;
+		plane.pos[0] = 0;
+		plane.pos[1] = 0;
+		plane.pos[2] = 0;
+		worldobjects.addBlock(plane);
 		for(int i = 0; i< 1000; i++){
 			block b = new block();
 			try {

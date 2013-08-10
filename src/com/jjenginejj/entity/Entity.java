@@ -14,12 +14,15 @@ public class Entity implements Serializable {
     private static final ArrayList<Entity> entities = new ArrayList<Entity>();
     private static boolean sorted;
     protected int ID;
-    protected final float[] pos = new float[3];
+	protected float[] pos = new float[3];
     protected boolean isNetwork;
     protected boolean isPlayingSound;
     protected Sound currentSound;
     protected model _model;
     protected Texture texture;
+	protected float[] rot = new float[3];
+	protected float[] size = new float[3];// for phys
+	protected float[] scale = new float[3]; //for rendering
 
     public static List<Entity> getEntities() {
 	return entities;
@@ -39,6 +42,11 @@ public class Entity implements Serializable {
 	e.pos[2] = z;
 	return e;
     }
+	public static Entity createEntity(float[] inpos) {
+		Entity e = createEntity();
+		e.pos = inpos;
+		return e;
+	}
 
     public static Entity createEntity(model _model) {
 	Entity e = createEntity();
@@ -54,38 +62,13 @@ public class Entity implements Serializable {
 
     private Entity() { }
 
-    public float getX() {
-	return pos[0];
-    }
-
-    public float getY() {
-	return pos[1];
-    }
-
-    public float getZ() {
-	return pos[2];
-    }
-
-    public void setX(float x) {
-	pos[0] = x;
-	if (currentSound != null) {
-	    currentSound.setPos(pos[0], pos[1], pos[2]);
+	public float[] getPos(){
+		return pos;
 	}
-    }
 
-    public void setY(float y) {
-	pos[1] = y;
-	if (currentSound != null) {
-	    currentSound.setPos(pos[0], pos[1], pos[2]);
-	}
-    }
-
-    public void setZ(float z) {
-	pos[3] = z;
-	if (currentSound != null) {
-	    currentSound.setPos(pos[0], pos[1], pos[2]);
-	}
-    }
+public void setPos(float[] inpos){
+	pos = inpos;
+}
 
     public boolean isNetworkEntity() {
 	return isNetwork;
@@ -135,7 +118,7 @@ public class Entity implements Serializable {
     }
     public void playSound(Sound sound) {
 	currentSound = sound;
-	sound.setPos(pos[0], pos[1], pos[2]);
+	sound.setPos(pos);
 	sound.play();
 	isPlayingSound = true;
     }

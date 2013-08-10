@@ -105,9 +105,7 @@ public class render {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		//glMatrixMode(GL_MODELVIEW);//just fo shitsngiggles
 		glLoadIdentity();// again, for shitsngiggles
-		camera.AdjustToCamera();
-		rotateCrap(0,(float)temprot,  0);
-		temprot++;
+		adjustToCamera();
 		glColor3f(1.0f, 1.0f, 0.0f);
 		worldobjects.draw();
 
@@ -142,5 +140,14 @@ public class render {
 		glRotatef(roll, 0, 0, 1);
 		glRotatef(yaw,  0, 1, 0);
 		glRotatef(pitch, 1, 0, 0);
+	}
+	public static void adjustToCamera(){
+		//all shits is negative because move "world", not "com.jjjenginejj.com.jjenginejj.render.render.camera"
+		//rotateCrap(-camera.roty, -camera.rotz, -camera.rotx);
+
+		glRotatef(-camera.rotx, 1, 0, 0);
+		glRotatef(-camera.rotz,  0, 1, 0);
+		glRotatef(-camera.roty, 0, 0, 1);
+		translateCrap(-camera.posx,-camera.posy,-camera.posz);
 	}
 }
