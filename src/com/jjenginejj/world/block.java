@@ -62,7 +62,6 @@ public class block {
 			verts[(i*5)+1] = to[1];
 			verts[(i*5)+2] = to[2];
 		}
-
 		return verts;
 	}
 }
