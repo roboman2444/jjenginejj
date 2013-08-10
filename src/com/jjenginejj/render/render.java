@@ -145,9 +145,9 @@ public class render {
 		//all shits is negative because move "world", not "com.jjjenginejj.com.jjenginejj.render.render.camera"
 		//rotateCrap(-camera.roty, -camera.rotz, -camera.rotx);
 
-		glRotatef(-camera.rotx, 1, 0, 0);
-		glRotatef(-camera.rotz,  0, 1, 0);
-		glRotatef(-camera.roty, 0, 0, 1);
-		translateCrap(-camera.posx,-camera.posy,-camera.posz);
+		glRotatef(-camera.rot[0]-90, 1, 0, 0);
+		glRotatef(-camera.rot[1],  0, 1, 0);
+		glRotatef(-camera.rot[2], 0, 0, 1);
+		translateCrap(-camera.pos[0],-camera.pos[1],-camera.pos[2]);
 	}
 }

@@ -5,7 +5,7 @@ import org.lwjgl.input.Mouse;
 
 
 public class input {
-	public static boolean  keyESC, keyM;
+	public static boolean  keyESC, keyM, keyW, keyA, keyS, keyD;
 
 	public static int mouseDeltaX = 0;
 	public static int mouseDeltaY = 0;
@@ -26,12 +26,20 @@ public class input {
 				switch(Keyboard.getEventKey()){
 					case Keyboard.KEY_ESCAPE:keyESC	= true; break;
 					case Keyboard.KEY_M:keyM	= true; break;
+					case Keyboard.KEY_W:keyW	= true; break;
+					case Keyboard.KEY_A:keyA	= true; break;
+					case Keyboard.KEY_S:keyS	= true; break;
+					case Keyboard.KEY_D:keyD	= true; break;
 				}
 			}
 			else {
 				switch(Keyboard.getEventKey()){
 					case Keyboard.KEY_ESCAPE:keyESC	= false; break;
 					case Keyboard.KEY_M:keyM	= false; break;
+					case Keyboard.KEY_W:keyW	= false; break;
+					case Keyboard.KEY_A:keyA	= false; break;
+					case Keyboard.KEY_S:keyS	= false; break;
+					case Keyboard.KEY_D:keyD	= false; break;
 				}
 			}
 		}

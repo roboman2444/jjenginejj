@@ -37,14 +37,14 @@ public class Matrix4x4{
 	public static Matrix4x4 createFromEntity(float[] pos, float[] rot, float[] scale){
 		double[] m = new double[16];
 		double angle, sr, sp, sy, cr, cp, cy;
-		//if(rot[2]!=0){ //NO SPEEDUP FOR U
-			angle = rot[1] * (Math.PI /180);
+		if(rot[2]!=0){ //NO SPEEDUP FOR U
+			angle = rot[1] * (Math.PI /180.0);
 			sy = Math.sin(angle);
 			cy = Math.cos(angle);
-			angle = rot[0] * (Math.PI /180);
+			angle = rot[0] * (Math.PI /180.0);
 			sp = Math.sin(angle);
 			cp = Math.cos(angle);
-			angle = rot[2] * (Math.PI /180);
+			angle = rot[2] * (Math.PI /180.0);
 			sr = Math.sin(angle);
 			cr = Math.cos(angle);
 			m[0] = (cp*cy) * scale[0];
@@ -63,8 +63,73 @@ public class Matrix4x4{
 			m[13] = 0;
 			m[14] = 0;
 			m[15] = 1;
-			return new Matrix4x4(m);
-		//}
+
+		} else if (rot[1] != 0){
+			angle = rot[1] * (Math.PI /180.0);
+			sy = Math.sin(angle);
+			cy = Math.cos(angle);
+			angle = rot[0] * (Math.PI /180.0);
+			sp = Math.sin(angle);
+			cp = Math.cos(angle);
+			m[0] = (cp*cy) * scale[0];
+			m[1] = (-sy) * scale[0];
+			m[2] = (sp*cy) * scale[0];
+			m[3] = pos[0];
+			m[4] = (cp*sy) * scale[1];
+			m[5] = (cy) * scale[1];
+			m[6] = (sp*sy) * scale[1];
+			m[7] = pos[1];
+			m[8] = (-sp) * scale[2];
+			m[9] = 0;
+			m[10] = (cp) * scale[2];
+			m[11] = pos[2];
+			m[12] = 0;
+			m[13] = 0;
+			m[14] = 0;
+			m[15] = 1;
+
+		} else if (rot[0] != 0){
+			angle = rot[1] * (Math.PI /180.0);
+			sy = Math.sin(angle);
+			cy = Math.cos(angle);
+			m[0] = (cy) * scale[0];
+			m[1] = (-sy) * scale[0];
+			m[2] = 0;
+			m[3] = pos[0];
+			m[4] = (sy) * scale[1];
+			m[5] = (cy) * scale[1];
+			m[6] = 0;
+			m[7] = pos[1];
+			m[8] = 0;
+			m[9] = 0;
+			m[10] = scale[2];
+			m[11] = pos[2];
+			m[12] = 0;
+			m[13] = 0;
+			m[14] = 0;
+			m[15] = 1;
+
+		} else {
+			m[0] = scale[0];
+			m[1] = 0;
+			m[2] = 0;
+			m[3] = pos[0];
+			m[4] = 0;
+			m[5] = scale[1];
+			m[6] = 0;
+			m[7] = pos[1];
+			m[8] = 0;
+			m[9] = 0;
+			m[10] = scale[2];
+			m[11] = pos[2];
+			m[12] = 0;
+			m[13] = 0;
+			m[14] = 0;
+			m[15] = 1;
+
+		}
+		return new Matrix4x4(m);
+
 	}
 
 	public static float[] transform(Matrix4x4 in, final float v[]){
