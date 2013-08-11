@@ -53,6 +53,18 @@ public class Texture {
 	GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 	System.out.println("Loaded Texture " + filename + "with size " + width + "x" + height + " and textureID " + textureID);
     }
+    public Texture(BufferedImage texture) {
+	textureID= GL11.glGenTextures();
+	GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID);
+	GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
+	GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
+	//GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, GL11.GL_CLAMP);
+	//GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T, GL11.GL_CLAMP);
+	//GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA8, width, height, 0,GL11.GL_RGBA, GL11.GL_INT, (java.nio.ByteBuffer) null);
+	drawBufferedImageToTexture(texture);
+	GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+	System.out.println("Loaded Texture from BufferedImage object with size " + width + "x" + height + " and textureID " + textureID);
+    }
     public static Texture addTexture(String filename){
 	Texture t = textureList.get(filename);
 	if(t == null){
@@ -67,6 +79,10 @@ public class Texture {
 
     private void drawImage(String filename) throws IOException {
 	BufferedImage image = loadImage(filename);
+	drawBufferedImageToTexture(image);
+    }
+
+    public void drawBufferedImageToTexture(BufferedImage image) {
 	int pixel;
 	if (image.getColorModel().hasAlpha()) {
 	    pixel = GL_RGBA;
