@@ -11,7 +11,7 @@ public final class Sound {
     private float volume;
     private boolean looping;
 
-    private float x, y, z;
+	private float[] pos = new float[3];
 
     private SoundState state;
 
@@ -25,12 +25,10 @@ public final class Sound {
         state = SoundState.STOPPED;
     }
 
-    public void setPos(float x, float y, float z) {
-	this.x = x;
-	this.y = y;
-	this.z = z;
+    public void setPos(float[] inpos) {
+	this.pos = inpos;
 
-	AL10.alSource3f(source, AL10.AL_POSITION, x, y, z);
+	AL10.alSource3f(source, AL10.AL_POSITION, pos[0], pos[1], pos[2]);
     }
 
     public void play() {
@@ -112,24 +110,14 @@ public final class Sound {
         return state;
     }
 
-    private static float lx, ly, lz;
-    public static void setListenerPos(float x, float y, float z) {
-	lx = x;
-	ly = y;
-	lz = z;
-	AL10.alListener3f(AL10.AL_POSITION, x, y, z);
+    private static float lpos[] = new float[3];
+    public static void setListenerPos(float[] inpos) {
+	lpos = inpos;
+	AL10.alListener3f(AL10.AL_POSITION, inpos[0], inpos[1], inpos[2]);
     }
 
-    public static float getListenerX() {
-	return lx;
-    }
-
-    public static float getListenerY() {
-	return ly;
-    }
-
-    public static float getListenerZ() {
-	return lz;
-    }
+public static float[] getListenerPos(){
+	return lpos;
+}
 
 }
