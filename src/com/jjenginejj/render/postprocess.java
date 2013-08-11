@@ -10,7 +10,7 @@ import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 public class postprocess {
 	private static void drawFSQuad(){     //todo make betterly
 		glLoadIdentity();
-		render.translateCrap(0f, -2f, 0f);
+		glTranslatef(0f, -2f, 0f);
 		glBegin(GL_QUADS);
 		glTexCoord2f(0.0f, 0.0f);
 		glVertex3f(-1,-1, 0.5f);

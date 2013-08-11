@@ -36,6 +36,7 @@ public class Matrix4x4{
 	 */
 	public static Matrix4x4 createFromEntity(float[] pos, float[] rot, float[] scale){
 		double[] m = new double[16];
+		//y then x then z
 		double angle, sr, sp, sy, cr, cp, cy;
 		if(rot[2]!=0){ //NO SPEEDUP FOR U
 			angle = rot[1] * (Math.PI /180.0);

@@ -1,10 +1,12 @@
 package com.jjenginejj.render;
 
+import com.jjenginejj.system.util.Matrix4x4;
 import com.jjenginejj.world.worldobjects;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.*;
 
+import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
@@ -119,9 +121,7 @@ public class render {
 
 	}
 
-	public static void translateCrap(float x, float y, float z){
-		glTranslatef(x, z, y);
-	}
+
 	public static void switchToPerspective(){
 		glMatrixMode(GL_PROJECTION);// Select The Projection Matrix
 		glLoadIdentity();// Reset The Projection Matrix
@@ -136,18 +136,35 @@ public class render {
 		glMatrixMode(GL_MODELVIEW);                     // Select The Modelview Matrix
 		glLoadIdentity();                           // Reset The Modelview Matrix
 	}
-	public static void rotateCrap(float roll, float yaw, float pitch){
-		glRotatef(roll, 0, 0, 1);
-		glRotatef(yaw,  0, 1, 0);
-		glRotatef(pitch, 1, 0, 0);
+	public static void rotateCrap(float[] rot){
+		glRotatef(-camera.rot[0], 1, 0, 0);
+		glRotatef(-camera.rot[1], 0, 1, 0);
+		glRotatef(-camera.rot[2], 0, 0, 1);
+	}
+	public static void translateCrap(float[] pos){
+		glTranslatef(pos[0], pos[1], pos[2]);
 	}
 	public static void adjustToCamera(){
 		//all shits is negative because move "world", not "com.jjjenginejj.com.jjenginejj.render.render.camera"
 		//rotateCrap(-camera.roty, -camera.rotz, -camera.rotx);
+		//glRotatef(-camera.rot[2], 0, 0, 1);
+		//glRotatef(-camera.rot[1], 0, 1, 0);
+		//glRotatef(-camera.rot[0], 1, 0, 0);
+		float[] tempscale = new float[3];
+		tempscale[0] = 1;
+		tempscale[1] = 1;
+		tempscale[2] = 1;
 
-		glRotatef(-camera.rot[0]-90, 1, 0, 0);
-		glRotatef(-camera.rot[1],  0, 1, 0);
-		glRotatef(-camera.rot[2], 0, 0, 1);
-		translateCrap(-camera.pos[0],-camera.pos[1],-camera.pos[2]);
+		Matrix4x4 cam = Matrix4x4.createFromEntity(camera.pos, camera.rot,tempscale);
+		cam.invert();
+		DoubleBuffer db = DoubleBuffer.allocate(16);
+		db.put(cam.m_);
+		db.flip();
+		glMultMatrix(db);
+
+		//glRotatef(-camera.rot[1],  0, 1, 0);
+		//glRotatef(-camera.rot[0], 1, 0, 0);
+		//glRotatef(-camera.rot[2], 0, 0, 1);
+		glTranslatef(-camera.pos[0], -camera.pos[1], -camera.pos[2]);
 	}
 }

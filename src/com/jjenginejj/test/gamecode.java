@@ -18,9 +18,9 @@ public class gamecode {
 		//com.jjenginejj.render.render.ppwhatx += 1f * nbody.timescale;
 		//com.jjenginejj.render.render.ppwhaty += 2f * nbody.timescale;
 		camera.rot[2] -= input.mouseDeltaX*mouseSensitivity;
-		camera.rot[0] += input.mouseDeltaY*mouseSensitivity;
-		if(camera.rot[0] > 90) camera.rot[0] = 90;
-		if(camera.rot[0] < -90) camera.rot[0] = -90;
+		camera.rot[1] += input.mouseDeltaY*mouseSensitivity;
+		if(camera.rot[1] > 180) camera.rot[1] = 180;
+		if(camera.rot[1] < 0) camera.rot[1] = 0;
 		if(input.keyESC)System.exit(0);
 		float tempscale[] = new float[3];
 		tempscale[0] = 1.0f;
