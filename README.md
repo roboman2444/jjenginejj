@@ -1,4 +1,4 @@
-com.jjenginejj.system.jjenginejj
+jjenginejj
 ==========
 
-jjenginej is gonna be pretty kewl
+We are gonna remake this in c++ with ogre3d or something.
